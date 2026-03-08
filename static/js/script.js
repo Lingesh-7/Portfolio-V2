@@ -1,22 +1,51 @@
 /* ============================================================
-   LINGESH R — script.js | Portfolio v3.1
+   LINGESH R — script.js | Portfolio v3.2
    ============================================================ */
 
 // ── Smooth scroll for nav links when already on homepage ─────
-// On other pages (e.g. /contact), href="/#skills" does a full
-// page load to / and the browser handles the hash scroll itself.
 document.addEventListener('DOMContentLoaded', () => {
   if (window.location.pathname !== '/') return;
-  document.querySelectorAll('.nav-links a[href^="/#"]').forEach(link => {
+  document.querySelectorAll('a[href^="/#"]').forEach(link => {
     link.addEventListener('click', e => {
-      e.preventDefault();
       const id = link.getAttribute('href').replace('/#', '');
       const target = document.getElementById(id);
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+        // Close mobile menu if open
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+      }
     });
   });
 });
 
+// ── Mobile Hamburger Menu ─────────────────────────────────────
+const hamburger = document.getElementById('navHamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  // Close on mobile link click
+  mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+  });
+}
 
 // ── Navbar active link highlight ─────────────────────────────
 window.addEventListener('scroll', () => {
@@ -31,6 +60,16 @@ window.addEventListener('scroll', () => {
     a.classList.toggle('nav-active', a.getAttribute('href') === '/#' + current);
   });
 }, { passive: true });
+
+// ── Navbar scroll shadow ──────────────────────────────────────
+const navbar = document.querySelector('.navbar-custom');
+if (navbar) {
+  window.addEventListener('scroll', () => {
+    navbar.style.boxShadow = window.scrollY > 20
+      ? '0 4px 30px rgba(0,0,0,0.4)'
+      : 'none';
+  }, { passive: true });
+}
 
 // ── Custom Cursor ────────────────────────────────────────────
 const cursorDot  = document.querySelector('.cursor-dot');
@@ -54,7 +93,7 @@ if (cursorDot && cursorRing) {
     requestAnimationFrame(animateRing);
   })();
 
-  document.querySelectorAll('a, button, .project-card, .impact-card, .skill-box').forEach(el => {
+  document.querySelectorAll('a, button, .project-card, .impact-card, .skill-box, .skill-card, .contact-social-btn').forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursorRing.style.width = '52px';
       cursorRing.style.height = '52px';
@@ -117,7 +156,7 @@ const counterObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
-// ── Particles.js (lightweight) ───────────────────────────────
+// ── Particles.js ─────────────────────────────────────────────
 if (typeof particlesJS !== 'undefined' && document.querySelector('#particles-js')) {
   particlesJS('particles-js', {
     particles: {
@@ -158,7 +197,17 @@ if (typeof particlesJS !== 'undefined' && document.querySelector('#particles-js'
   if (prev) prev.addEventListener('click', () => goTo(current - 1));
   if (next) next.addEventListener('click', () => goTo(current + 1));
 
+  // Touch/swipe support
   const carouselWrap = track.closest('.updates-carousel');
+  let touchStartX = 0;
+  if (carouselWrap) {
+    carouselWrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    carouselWrap.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    }, { passive: true });
+  }
+
   let timer = setInterval(() => goTo(current + 1), 4000);
   if (carouselWrap) {
     carouselWrap.addEventListener('mouseenter', () => clearInterval(timer));
@@ -186,31 +235,77 @@ if (params.get('sent') === 'true') {
   const banner = document.createElement('div');
   banner.style.cssText = `
     position:fixed; top:88px; left:50%; transform:translateX(-50%);
-    background:#16161f; border:1px solid rgba(255,107,53,0.4);
+    background:#16161f; border:1px solid rgba(34,197,94,0.4);
     color:#e8e8f0; padding:13px 28px; border-radius:12px;
     font-family:'Space Mono',monospace; font-size:13px;
     box-shadow:0 10px 30px rgba(0,0,0,0.5); z-index:9999;
+    display:flex; align-items:center; gap:10px;
   `;
-  banner.textContent = '✓ Message sent — I\'ll get back to you soon!';
+  banner.innerHTML = '<span style="color:#22c55e;font-size:16px;">✓</span> Message sent — I\'ll get back to you soon!';
   document.body.appendChild(banner);
+  // Fade out
+  setTimeout(() => { banner.style.transition = 'opacity 0.5s'; banner.style.opacity = '0'; }, 3500);
   setTimeout(() => banner.remove(), 4000);
   history.replaceState({}, '', window.location.pathname);
 }
 
 // ── Skill Tabs ────────────────────────────────────────────────
-(function initSkillTabs() {
-  const tabs   = document.querySelectorAll('.skill-tab');
-  const panels = document.querySelectorAll('.skill-panel');
-  if (!tabs.length) return;
+// (function initSkillTabs() {
+//   const tabs   = document.querySelectorAll('.skill-tab');
+//   const panels = document.querySelectorAll('.skill-panel');
+//   if (!tabs.length) return;
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.getAttribute('data-target');
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
+//   tabs.forEach(tab => {
+//     tab.addEventListener('click', () => {
+//       const target = tab.getAttribute('data-target');
+//       tabs.forEach(t => t.classList.remove('active'));
+//       panels.forEach(p => p.classList.remove('active'));
+//       tab.classList.add('active');
+//       const panel = document.getElementById(target);
+//       if (panel) panel.classList.add('active');
+//     });
+//   });
+// })();
+
+// ── Skill Pills (replaces old initSkillTabs) ─────────────────
+// Replace the old initSkillTabs() block in script.js with this:
+
+(function initSkillTabs() {
+  const pills  = document.querySelectorAll('.skills-pill');
+  const panels = document.querySelectorAll('.skill-panel');
+  if (!pills.length) return;
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const target = pill.getAttribute('data-target');
+
+      // Update pills
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      // Update panels with re-trigger animation
+      panels.forEach(p => {
+        p.classList.remove('active');
+        p.style.animation = 'none';
+      });
+
       const panel = document.getElementById(target);
-      if (panel) panel.classList.add('active');
+      if (panel) {
+        panel.classList.add('active');
+        // Force reflow to restart animation
+        void panel.offsetWidth;
+        panel.style.animation = '';
+      }
     });
   });
 })();
+
+// ── Lazy Image Fade-in ────────────────────────────────────────
+// Add this block to script.js
+document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+  if (img.complete) {
+    img.classList.add('loaded');
+  } else {
+    img.addEventListener('load', () => img.classList.add('loaded'));
+  }
+});

@@ -1,11 +1,18 @@
 <section class="hero" id="home">
   <div id="particles-js"></div>
 
+  <!-- Ambient glow orbs for depth -->
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
   <div class="hero-wrapper">
     <div class="hero-container">
 
       <div class="hero-text">
-        <span class="hero-eyebrow">Available for opportunities</span>
+        <div class="hero-eyebrow">
+          <span class="eyebrow-dot"></span>
+          Available for opportunities
+        </div>
 
         <h1>Hi, I'm <span class="name-highlight">Lingesh</span></h1>
 
@@ -19,12 +26,11 @@
         </p>
 
         <div class="hero-buttons">
-          <a href="#projects" class="btn-primary">
-            View My Work →
+          <a href="/#projects" class="btn-primary">
+            View My Work
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;margin-left:4px"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="/contact" class="btn-secondary">
-            Get in Touch
-          </a>
+          <a href="/contact" class="btn-secondary">Get in Touch</a>
         </div>
 
         <div class="hero-stats">
@@ -47,13 +53,52 @@
         <div class="hero-photo-ring"></div>
         <div class="hero-photo-ring-2"></div>
         <div class="hero-photo-glow"></div>
-        <img src="{{ url_for('static', filename='images/lingesh.jpg') }}" alt="Lingesh R">
+        <img src="{{ url_for('static', filename='images/lingesh.jpg') }}" alt="Lingesh R — AI Engineer" loading="eager">
         <div class="hero-badge">
           <span class="badge-dot"></span>
           <span>Open to Work</span>
         </div>
+        <!-- Floating context chips -->
+        <div class="hero-chip chip-1">🧠 ML</div>
+        <div class="hero-chip chip-2">🤖 AI</div>
+        <div class="hero-chip chip-3">📡 IoT</div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Scrolling tech marquee at bottom of hero -->
+  <div class="hero-marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Python</span><span class="marquee-dot">·</span>
+      <span>TensorFlow</span><span class="marquee-dot">·</span>
+      <span>PyTorch</span><span class="marquee-dot">·</span>
+      <span>LangChain</span><span class="marquee-dot">·</span>
+      <span>Flask</span><span class="marquee-dot">·</span>
+      <span>OpenCV</span><span class="marquee-dot">·</span>
+      <span>FAISS</span><span class="marquee-dot">·</span>
+      <span>Scikit-Learn</span><span class="marquee-dot">·</span>
+      <span>ESP32</span><span class="marquee-dot">·</span>
+      <span>HuggingFace</span><span class="marquee-dot">·</span>
+      <span>FastAPI</span><span class="marquee-dot">·</span>
+      <span>LangGraph</span><span class="marquee-dot">·</span>
+      <span>CrewAI</span><span class="marquee-dot">·</span>
+      <span>Pandas</span><span class="marquee-dot">·</span>
+      <!-- duplicate for seamless infinite loop -->
+      <span>Python</span><span class="marquee-dot">·</span>
+      <span>TensorFlow</span><span class="marquee-dot">·</span>
+      <span>PyTorch</span><span class="marquee-dot">·</span>
+      <span>LangChain</span><span class="marquee-dot">·</span>
+      <span>Flask</span><span class="marquee-dot">·</span>
+      <span>OpenCV</span><span class="marquee-dot">·</span>
+      <span>FAISS</span><span class="marquee-dot">·</span>
+      <span>Scikit-Learn</span><span class="marquee-dot">·</span>
+      <span>ESP32</span><span class="marquee-dot">·</span>
+      <span>HuggingFace</span><span class="marquee-dot">·</span>
+      <span>FastAPI</span><span class="marquee-dot">·</span>
+      <span>LangGraph</span><span class="marquee-dot">·</span>
+      <span>CrewAI</span><span class="marquee-dot">·</span>
+      <span>Pandas</span><span class="marquee-dot">·</span>
     </div>
   </div>
 

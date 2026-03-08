@@ -720,7 +720,7 @@ section {
 /* ─────────────────────────────────────────────────────────────
    SKILLS
 ───────────────────────────────────────────────────────────── */
-.skills-section {
+/* .skills-section {
   padding: 100px 0;
   background: var(--bg);
 }
@@ -822,7 +822,238 @@ section {
   color: var(--white);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+} */
+
+
+/* ============================================================
+   SKILLS SECTION — PILL TAB REDESIGN
+   Append this to the bottom of style.css,
+   replacing the old "Skills v2" block if present.
+   ============================================================ */
+
+/* ── Section header ─────────────────────────────────────────── */
+.skills-header {
+  margin-bottom: 36px;
 }
+
+.skills-header .section-title {
+  font-size: clamp(26px, 3vw, 38px);
+  margin-bottom: 12px;
+}
+
+.skills-subtitle {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 620px;
+}
+
+/* ── Pill row ────────────────────────────────────────────────── */
+.skills-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+
+.skills-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;                      /* full pill shape */
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: var(--trans);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Shimmer sweep on hover */
+.skills-pill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,107,53,0.08), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+.skills-pill:hover::before { transform: translateX(100%); }
+
+.skills-pill:hover {
+  border-color: rgba(255,107,53,0.4);
+  color: var(--text);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* Active pill — filled orange */
+.skills-pill.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--white);
+  box-shadow: 0 0 20px var(--glow), 0 6px 24px rgba(255,107,53,0.3);
+  transform: translateY(-1px);
+}
+
+.skills-pill.active::before { display: none; }
+
+.pill-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.pill-label {
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+
+/* Skill count badge */
+.pill-count {
+  font-size: 10px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 999px;
+  padding: 1px 7px;
+  line-height: 1.6;
+  letter-spacing: 0;
+  font-family: var(--font-mono);
+}
+
+.skills-pill.active .pill-count {
+  background: rgba(255,255,255,0.25);
+}
+
+/* ── Panel area ──────────────────────────────────────────────── */
+.skills-panels-area {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+  min-height: 220px;
+  position: relative;
+}
+
+/* Panel fade-in animation */
+.skill-panel {
+  display: none;
+  animation: panelFadeIn 0.3s ease forwards;
+}
+
+.skill-panel.active {
+  display: block;
+}
+
+@keyframes panelFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Skill cards grid ────────────────────────────────────────── */
+.skill-cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skill-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  width: 96px;
+  padding: 16px 10px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: var(--trans);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--orange), var(--amber));
+  transition: width 0.4s ease;
+}
+
+.skill-card:hover {
+  border-color: rgba(255,107,53,0.3);
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.35);
+  background: var(--bg3);
+}
+
+.skill-card:hover::after { width: 100%; }
+
+.skill-card img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover img {
+  transform: scale(1.15) rotate(-3deg);
+}
+
+.skill-card span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+  text-align: center;
+  line-height: 1.3;
+  transition: color 0.3s;
+}
+
+.skill-card:hover span {
+  color: var(--text);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .skills-pill-row {
+    gap: 8px;
+  }
+  .skills-pill {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
+  .pill-label {
+    font-size: 11px;
+  }
+  .skills-panels-area {
+    padding: 24px 18px;
+  }
+  .skill-card {
+    width: 84px;
+    padding: 14px 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-pill-row {
+    gap: 6px;
+  }
+  .skills-pill {
+    padding: 7px 12px;
+  }
+  /* Hide count on very small screens */
+  .pill-count { display: none; }
+}
+
 
 /* ─────────────────────────────────────────────────────────────
    PROJECTS
@@ -1450,4 +1681,677 @@ section {
 @media (max-width: 600px) {
   .wrap, .skills-wrapper { padding: 0 20px; }
   .skill-cards-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+}
+
+
+/* ============================================================
+   PORTFOLIO IMPROVEMENTS — Append to bottom of style.css
+   ============================================================ */
+
+/* ── Mobile Hamburger Nav ───────────────────────────────────── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: var(--trans);
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--trans);
+}
+
+.nav-hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  background: rgba(10,10,15,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 999;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-menu-inner {
+  padding: 20px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-link {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--muted);
+  padding: 12px 16px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+  transition: var(--trans);
+  display: block;
+}
+
+.mobile-link:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.04);
+}
+
+.mobile-link.highlight {
+  color: var(--orange);
+  background: rgba(255,107,53,0.08);
+  border: 1px solid rgba(255,107,53,0.2);
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* ── Footer CTA Banner ──────────────────────────────────────── */
+.footer-cta {
+  background: linear-gradient(135deg, rgba(255,107,53,0.08) 0%, rgba(255,170,68,0.05) 100%);
+  border-top: 1px solid rgba(255,107,53,0.15);
+  border-bottom: 1px solid rgba(255,107,53,0.15);
+  padding: 48px 60px;
+}
+
+.footer-cta-inner {
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.footer-cta-text h3 {
+  font-size: 26px;
+  color: var(--white);
+  margin-bottom: 6px;
+  font-weight: 800;
+}
+
+.footer-cta-text p {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.footer-cta-btn {
+  background: var(--orange);
+  color: var(--white);
+  padding: 14px 32px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: var(--trans);
+  box-shadow: 0 0 25px var(--glow);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.footer-cta-btn:hover {
+  background: var(--amber);
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(255,170,68,0.4);
+  color: var(--white);
+}
+
+/* ── Footer Social Icons ────────────────────────────────────── */
+.footer-social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.footer-social-icons a {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: var(--trans);
+}
+
+.footer-social-icons a:hover {
+  color: var(--orange);
+  border-color: rgba(255,107,53,0.3);
+  background: rgba(255,107,53,0.06);
+  transform: translateY(-2px);
+}
+
+/* ── Improved Contact Page ──────────────────────────────────── */
+.contact-page-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  padding: 120px 60px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+  min-height: 100vh;
+}
+
+.contact-info-panel {
+  position: sticky;
+  top: 100px;
+}
+
+.contact-page-title {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 800;
+  color: var(--white);
+  margin: 16px 0 20px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.contact-title-accent {
+  background: linear-gradient(135deg, var(--orange), var(--amber));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contact-info-desc {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 380px;
+  margin-bottom: 40px;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.contact-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.contact-detail-icon {
+  font-size: 20px;
+  width: 42px;
+  height: 42px;
+  background: rgba(255,107,53,0.08);
+  border: 1px solid rgba(255,107,53,0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-detail-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--orange);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.contact-detail-value {
+  display: block;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.contact-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.contact-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  transition: var(--trans);
+}
+
+.contact-social-btn:hover {
+  color: var(--orange);
+  border-color: rgba(255,107,53,0.3);
+  background: rgba(255,107,53,0.06);
+  transform: translateY(-2px);
+}
+
+/* ── Contact Form Card ──────────────────────────────────────── */
+.contact-form-panel {
+  padding-top: 8px;
+}
+
+.contact-form-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--amber));
+}
+
+.contact-form-heading {
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.contact-form-sub {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.form-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--orange);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ── Responsive additions ───────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav-hamburger { display: flex; }
+  .mobile-menu   { display: block; }
+  .nav-actions .btn-sayhello,
+  .nav-actions .btn-resume { display: none; }
+
+  .contact-page-wrapper {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 100px 24px 60px;
+  }
+
+  .contact-info-panel { position: static; }
+
+  .footer-cta { padding: 36px 24px; }
+  .footer-cta-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; }
+  .contact-form-card { padding: 24px; }
+  .contact-page-title { font-size: 36px; }
+}
+
+
+/* ============================================================
+   FINAL IMPROVEMENTS — Append to bottom of style.css
+   ============================================================ */
+
+/* ── Hero: Ambient Glow Orbs ────────────────────────────────── */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 70%);
+  top: -100px;
+  right: 5%;
+  animation: orbFloat 8s ease-in-out infinite;
+}
+
+.hero-orb-2 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(255,170,68,0.08) 0%, transparent 70%);
+  bottom: 10%;
+  left: 5%;
+  animation: orbFloat 10s ease-in-out infinite reverse;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-30px) scale(1.05); }
+}
+
+/* ── Hero: Eyebrow with animated dot ────────────────────────── */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--orange);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.2s forwards;
+  background: rgba(255,107,53,0.08);
+  border: 1px solid rgba(255,107,53,0.2);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulse-glow 2s infinite;
+  flex-shrink: 0;
+}
+
+/* ── Hero: Floating tech chips ──────────────────────────────── */
+.hero-chip {
+  position: absolute;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text);
+  backdrop-filter: blur(10px);
+  z-index: 4;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  pointer-events: none;
+}
+
+.chip-1 {
+  top: 10%;
+  left: -30px;
+  animation: chipFloat 4s ease-in-out infinite;
+}
+
+.chip-2 {
+  top: 50%;
+  right: -24px;
+  animation: chipFloat 5s ease-in-out infinite 0.5s;
+}
+
+.chip-3 {
+  bottom: 15%;
+  left: -20px;
+  animation: chipFloat 4.5s ease-in-out infinite 1s;
+}
+
+@keyframes chipFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ── Hero: Marquee tech strip ───────────────────────────────── */
+.hero-marquee {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  background: rgba(10,10,15,0.6);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap;
+  animation: marqueeScroll 30s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.marquee-track .marquee-dot {
+  color: var(--orange);
+  opacity: 0.5;
+}
+
+.hero-marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+/* ============================================================
+   PROJECT FIXES — Append to very bottom of style.css
+   ============================================================ */
+
+/* ── Fix 1: Remove featured card — not needed anymore ───────── */
+/* Hide any remnant featured card if it exists in DOM */
+.project-featured { display: none !important; }
+
+/* ── Fix 2: Uniform 3-col grid, equal height cards ──────────── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 28px;
+  align-items: stretch;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--trans);
+  position: relative;
+  z-index: 1;
+}
+
+.project-card:hover {
+  border-color: rgba(255,107,53,0.35);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.45);
+}
+
+/* Image area — fixed height, never collapses */
+.project-img-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+  flex-shrink: 0;
+  background: var(--bg3);
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.06);
+}
+
+/* Content area fills remaining space */
+.project-content {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.project-content h3 {
+  font-size: 16px;
+  color: var(--white);
+  margin-bottom: 10px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.project-content p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--muted);
+  flex: 1;           /* takes all remaining vertical space */
+  margin-bottom: 14px;
+}
+
+/* Tech tags — MUCH more visible */
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.project-tech span {
+  background: rgba(255, 107, 53, 0.1);   /* orange tint instead of near-invisible dark */
+  border: 1px solid rgba(255, 107, 53, 0.25);
+  color: #c8c8d8;                         /* much brighter than var(--muted) #6b6b7e */
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.3px;
+  transition: var(--trans);
+}
+
+.project-tech span:hover {
+  background: rgba(255, 107, 53, 0.2);
+  border-color: rgba(255, 107, 53, 0.5);
+  color: var(--white);
+}
+
+/* Buttons always at bottom */
+.project-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* ── Fix 3: Award ribbon on card image ──────────────────────── */
+.card-award-ribbon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255, 170, 68, 0.15);
+  border: 1px solid rgba(255, 170, 68, 0.4);
+  color: var(--amber);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Fix 4: Overlay always on top of ribbon ─────────────────── */
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,10,15,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0;
+  transition: var(--trans);
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+.project-card:hover .project-overlay { opacity: 1; }
+
+/* ── Fix 5: Responsive breakpoints ──────────────────────────── */
+@media (max-width: 1100px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 680px) {
+  .projects-grid { grid-template-columns: 1fr; }
 }

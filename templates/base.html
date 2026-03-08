@@ -3,36 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lingesh R | AI Engineer</title>
-  <meta name="description" content="Portfolio of Lingesh R — AI Engineer, ML Engineer & Data Scientist">
 
-  <link rel="icon" href="{{ url_for('static', filename='images/image.png') }}">
+  <!-- ── Primary SEO ──────────────────────────────────────── -->
+  <title>Lingesh R | AI & ML Engineer — Puducherry, India</title>
+  <meta name="description" content="Portfolio of Lingesh R — AI Engineer, ML Engineer & Data Scientist building intelligent systems with Python, TensorFlow, LangChain, and IoT.">
+  <meta name="keywords" content="Lingesh R, AI Engineer, ML Engineer, Data Scientist, Python, TensorFlow, LangChain, IoT, Portfolio, Puducherry">
+  <meta name="author" content="Lingesh R">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lingesh.dev/">
 
-  <!-- Fonts -->
+  <!-- ── Open Graph (LinkedIn, WhatsApp, Facebook) ────────── -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Lingesh R | AI & ML Engineer">
+  <meta property="og:description" content="Building intelligent systems with ML, data science, and IoT. Check out my projects and get in touch.">
+  <meta property="og:image" content="{{ url_for('static', filename='images/lingesh.jpg', _external=True) }}">
+  <meta property="og:url" content="https://lingesh.dev/">
+  <meta property="og:site_name" content="Lingesh R Portfolio">
+
+  <!-- ── Twitter Card ──────────────────────────────────────── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lingesh R | AI & ML Engineer">
+  <meta name="twitter:description" content="Building intelligent systems with ML, data science, and IoT.">
+  <meta name="twitter:image" content="{{ url_for('static', filename='images/lingesh.jpg', _external=True) }}">
+
+  <!-- ── Favicon ───────────────────────────────────────────── -->
+  <link rel="icon" href="{{ url_for('static', filename='images/image.png') }}" type="image/png">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/image.png') }}">
+
+  <!-- ── Fonts ─────────────────────────────────────────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
+  <!-- ── Styles ────────────────────────────────────────────── -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- ── JSON-LD Structured Data ───────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Lingesh R",
+    "jobTitle": "AI & ML Engineer",
+    "url": "https://lingesh.dev",
+    "sameAs": [
+      "https://github.com/Lingesh-7",
+      "https://www.linkedin.com/in/rajalingesh"
+    ],
+    "knowsAbout": ["Machine Learning", "Deep Learning", "Python", "TensorFlow", "LangChain", "IoT", "Data Science"]
+  }
+  </script>
 </head>
 <body>
 
-  <!-- Cursor -->
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
-
-  <!-- Scroll Progress -->
   <div class="scroll-progress"></div>
 
   {% include "components/navbar.html" %}
 
   {% block content %}{% endblock %}
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <!-- Scripts — loaded at end for performance -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" defer></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 
 </body>
 </html>
