@@ -2358,3 +2358,66 @@ section {
 
 
 
+/* ============================================================
+   MARQUEE FIX — Append to bottom of style.css
+   ============================================================ */
+
+/* ── Fix: Hero marquee bleeding / gap issue ─────────────────
+   The marquee was position:absolute bottom:0 inside .hero
+   which has min-height:100vh. When content is tall the hero
+   grows but the marquee stays pinned to viewport bottom edge,
+   creating a visible dark strip below the hero content.
+
+   Solution: remove the absolute positioning — let the marquee
+   sit as a normal flow element AFTER .hero-wrapper, still
+   inside .hero. Add enough bottom padding to the hero so the
+   marquee never overlaps the hero-wrapper content.
+─────────────────────────────────────────────────────────── */
+
+.hero {
+  padding-bottom: 44px; /* reserve space for marquee height */
+  flex-direction: column; /* stack hero-wrapper and marquee vertically */
+  justify-content: space-between;
+}
+
+.hero-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-marquee {
+  position: relative;  /* override position:absolute */
+  bottom: auto;
+  left: auto;
+  right: auto;
+  width: 100%;
+  height: 44px;
+  margin-top: auto;    /* pushes to bottom of flex column */
+  /* keep the rest of the styles intact */
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  background: rgba(10,10,15,0.6);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+/* Scroll indicator — keep it above the marquee */
+.scroll-indicator {
+  position: absolute;
+  bottom: 60px; /* push up above the 44px marquee */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+/* Mobile — hide marquee on very small screens to save space */
+@media (max-width: 480px) {
+  .hero-marquee { display: none; }
+  .hero { padding-bottom: 0; }
+  .scroll-indicator { bottom: 20px; }
+}
