@@ -13,41 +13,54 @@
       <div class="updates-track-wrap">
         <div class="updates-track" style="display:flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);">
 
-          <!-- Slide 1 -->
+          <!-- Slide 1 — NoteForge-AI -->
+          <div class="update-card-wrap" style="min-width:100%;">
+            <div class="update-card">
+              <img src="/static/images/notes2.png" class="update-img" alt="NoteForge-AI">
+              <div class="update-body">
+                <span class="update-tag">🚀 Project · 2026</span>
+                <h3>NoteForge-AI</h3>
+                <p>Built a multi-agent AI system that converts a syllabus into structured, exam-ready notes using retrieval, refinement loops, and automated question generation with PDF export.</p>
+                <span class="update-year">LangChain · LangGraph · Streamlit · 2026</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 — Hackathon 2nd place -->
           <div class="update-card-wrap" style="min-width:100%;">
             <div class="update-card">
               <img src="/static/images/hackathon.png" class="update-img" alt="Hackathon">
               <div class="update-body">
-                <span class="update-tag">🏆 Award · 2026</span>
+                <span class="update-tag">🥈 Award · 2026</span>
                 <h3>Second Place – State Level Hackathon</h3>
-                <p>Secured 2nd place in a state-level hackathon by developing an AI-based nightmare detection system that monitors sleep patterns and triggers vibration feedback to help the user return to stable deep sleep.</p>
+                <p>Secured 2nd place at a state-level hackathon by developing an AI-based nightmare detection system that monitors sleep patterns and triggers vibration feedback to help the user return to stable deep sleep.</p>
                 <span class="update-year">Meenakshi Engineering College · 2026</span>
               </div>
             </div>
           </div>
 
-          <!-- Slide 2 -->
+          <!-- Slide 3 — Best Real World Applicability -->
           <div class="update-card-wrap" style="min-width:100%;">
             <div class="update-card">
               <img src="/static/images/ideathon.jpeg" class="update-img" alt="Ideathon">
               <div class="update-body">
-                <span class="update-tag">🎖 Award · 2026</span>
+                <span class="update-tag">🏆 Award · 2025</span>
                 <h3>Best Real World Applicability – National Ideathon</h3>
                 <p>Won the Best Real World Applicability award at a national-level ideathon for presenting a low-cost AI and IoT-based sleep apnea monitoring system designed for practical healthcare use.</p>
-                <span class="update-year">Aarupadai Veedu Institute of Technology · 2026</span>
+                <span class="update-year">Aarupadai Veedu Institute of Technology · 2025</span>
               </div>
             </div>
           </div>
 
-          <!-- Slide 3 -->
+          <!-- Slide 4 — Sleep Apnea Project -->
           <div class="update-card-wrap" style="min-width:100%;">
             <div class="update-card">
               <img src="/static/images/apnea_project.jpeg" class="update-img" alt="Sleep Apnea Project">
               <div class="update-body">
-                <span class="update-tag">🚀 Project · 2026</span>
+                <span class="update-tag">🚀 Project · 2025</span>
                 <h3>Sleep Apnea Detection & Monitoring System</h3>
                 <p>Developed a low-cost AI + IoT system that detects sleep apnea events using breathing audio and physiological signals for real-time monitoring and automated alerts.</p>
-                <span class="update-year">AI + IoT · Python · TensorFlow · ESP32</span>
+                <span class="update-year">AI + IoT · Python · TensorFlow · ESP32 · 2025</span>
               </div>
             </div>
           </div>
@@ -59,8 +72,61 @@
         <button class="carousel-dot active"></button>
         <button class="carousel-dot"></button>
         <button class="carousel-dot"></button>
+        <button class="carousel-dot"></button>
       </div>
     </div>
 
   </div>
 </section>
+
+<script>
+(function initPingPongCarousel() {
+  const track  = document.querySelector('.updates-track');
+  const dots   = document.querySelectorAll('.carousel-dot');
+  const prev   = document.querySelector('.carousel-prev');
+  const next   = document.querySelector('.carousel-next');
+  if (!track) return;
+
+  const slides  = track.querySelectorAll('.update-card-wrap');
+  const total   = slides.length;
+  let current   = 0;
+  let direction = 1;
+  let timer     = null;
+
+  function goTo(i) {
+    current = Math.max(0, Math.min(i, total - 1));
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, j) => d.classList.toggle('active', j === current));
+  }
+
+  function autoStep() {
+    if (current === total - 1) direction = -1;
+    if (current === 0)          direction =  1;
+    goTo(current + direction);
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(autoStep, 3800);
+  }
+
+  if (prev) prev.addEventListener('click', () => { goTo(current - 1); startTimer(); });
+  if (next) next.addEventListener('click', () => { goTo(current + 1); startTimer(); });
+  dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); startTimer(); }));
+
+  const wrap = track.closest('.updates-carousel');
+  let touchStartX = 0;
+  if (wrap) {
+    wrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); startTimer(); }
+    }, { passive: true });
+    wrap.addEventListener('mouseenter', () => clearInterval(timer));
+    wrap.addEventListener('mouseleave', startTimer);
+  }
+
+  goTo(0);
+  startTimer();
+})();
+</script>

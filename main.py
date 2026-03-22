@@ -4,6 +4,9 @@ from twilio.rest import Client
 from flask import Flask, render_template, send_from_directory, request, redirect, flash
 from twilio.rest import Client
 
+from dotenv import load_dotenv
+load_dotenv()
+
 app=Flask(__name__)
 FLASK_KEY=os.environ.get("FLASK_KEY")
 app.config['SECRET_KEY'] = FLASK_KEY
