@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: lingesh-r-portfolio
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn main:app --workers 2 --threads 4 --timeout 60 --bind 0.0.0.0:$PORT --access-logfile -
+    healthCheckPath: /healthz
+    autoDeployTrigger: commit
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SITE_URL
+        value: https://lingesh-r-portfolio-o39l.onrender.com
+      - key: FLASK_KEY
+        generateValue: true
+      - key: account_sid
+        sync: false
+      - key: auth_token
+        sync: false
+      - key: twilio_number
+        sync: false
+      - key: your_phone
+        sync: false

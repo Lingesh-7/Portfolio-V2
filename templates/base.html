@@ -1,39 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="ember">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>document.documentElement.classList.add('js');</script>
+  <script>(function(){try{var ok=['ember','slate','dusk','sage','paper','mono'];var q=new URLSearchParams(location.search).get('theme');var t=ok.indexOf(q)>-1?q:localStorage.getItem('theme');if(ok.indexOf(t)>-1){document.documentElement.setAttribute('data-theme',t);if(q===t)localStorage.setItem('theme',t);}}catch(e){}})();</script>
 
   <!-- ── Primary SEO ──────────────────────────────────────── -->
-  <title>Lingesh R | AI & ML Engineer — Puducherry, India</title>
-  <meta name="description" content="Portfolio of Lingesh R — AI Engineer, ML Engineer & Data Scientist building intelligent systems with Python, TensorFlow, LangChain, and IoT.">
-  <meta name="keywords" content="Lingesh R, AI Engineer, ML Engineer, Data Scientist, Python, TensorFlow, LangChain, IoT, Portfolio, Puducherry">
+  <title>{% block title %}Lingesh R | AI Engineer for Agentic AI, RAG &amp; LLM Apps{% endblock %}</title>
+  <meta name="description" content="{% block description %}Portfolio of Lingesh R. AI engineer building agentic AI, RAG pipelines and LLM applications with Python, LangGraph and LangChain. Former AI Automation Intern at CommerceV3.{% endblock %}">
+  <meta name="keywords" content="Lingesh R, AI Engineer, Agentic AI, Generative AI, RAG, LLM, LangGraph, LangChain, Hugging Face, QLoRA, Python, Portfolio">
   <meta name="author" content="Lingesh R">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://lingesh.dev/">
+  <link rel="canonical" href="{{ request.url_root.rstrip('/') }}{{ request.path }}">
+  <meta name="theme-color" content="#0a0a0f">
 
   <!-- ── Open Graph (LinkedIn, WhatsApp, Facebook) ────────── -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Lingesh R | AI & ML Engineer">
-  <meta property="og:description" content="Building intelligent systems with ML, data science, and IoT. Check out my projects and get in touch.">
+  <meta property="og:title" content="{% block og_title %}Lingesh R | AI Engineer{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Agentic AI, RAG and LLM applications. Former AI Automation Intern at CommerceV3. See my projects and get in touch.{% endblock %}">
   <meta property="og:image" content="{{ url_for('static', filename='images/lingesh.jpg', _external=True) }}">
-  <meta property="og:url" content="https://lingesh.dev/">
+  <meta property="og:url" content="{{ request.url_root.rstrip('/') }}{{ request.path }}">
   <meta property="og:site_name" content="Lingesh R Portfolio">
 
   <!-- ── Twitter Card ──────────────────────────────────────── -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lingesh R | AI & ML Engineer">
-  <meta name="twitter:description" content="Building intelligent systems with ML, data science, and IoT.">
+  <meta name="twitter:title" content="{% block twitter_title %}Lingesh R | AI Engineer{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Agentic AI, RAG and LLM applications.{% endblock %}">
   <meta name="twitter:image" content="{{ url_for('static', filename='images/lingesh.jpg', _external=True) }}">
 
   <!-- ── Favicon ───────────────────────────────────────────── -->
-  <link rel="icon" href="{{ url_for('static', filename='images/image.png') }}" type="image/png">
-  <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/image.png') }}">
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon.svg') }}" type="image/svg+xml">
+  <link rel="icon" href="{{ url_for('static', filename='images/logo-512.png') }}" type="image/png" sizes="512x512">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
 
   <!-- ── Fonts ─────────────────────────────────────────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- ── Styles ────────────────────────────────────────────── -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -44,34 +48,52 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Lingesh R",
-    "jobTitle": "AI & ML Engineer",
-    "url": "https://lingesh.dev",
+    "jobTitle": "AI Engineer",
+    "url": "{{ request.url_root }}",
+    "email": "mailto:lingesh.r.official@gmail.com",
     "sameAs": [
       "https://github.com/Lingesh-7",
-      "https://www.linkedin.com/in/rajalingesh"
+      "https://www.linkedin.com/in/rajalingesh",
+      "https://www.instagram.com/__.lingesh._/"
     ],
-    "knowsAbout": ["Machine Learning", "Deep Learning", "Python", "TensorFlow", "LangChain", "IoT", "Data Science"]
+    "knowsAbout": ["Agentic AI", "Generative AI", "Retrieval-Augmented Generation", "Large Language Models", "LangGraph", "LangChain", "Machine Learning", "Deep Learning", "Python"],
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Sri Manakula Vinayagar Engineering College"
+    }
   }
   </script>
 </head>
 <body>
 
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
-  <div class="scroll-progress"></div>
+  <!-- Shared SVG paints so inline covers and the logo follow the active theme -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="g-main" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color: var(--accent)"/><stop offset="1" style="stop-color: var(--accent-2)"/></linearGradient>
+      <linearGradient id="g-diag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color: var(--accent)"/><stop offset="1" style="stop-color: var(--accent-2)"/></linearGradient>
+      <marker id="cv-arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9z" style="fill: var(--accent-2)"/></marker>
+      <marker id="cv-arrow-hot" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9z" style="fill: var(--accent)"/></marker>
+    </defs>
+  </svg>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
 
   {% include "components/navbar.html" %}
 
-  {% block content %}{% endblock %}
+  <main>
+    {% block content %}{% endblock %}
+  </main>
 
-  <!-- Scripts — loaded at end for performance -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" defer></script>
+  <!-- Quick-jump palette (Ctrl/Cmd + K) -->
+  <div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Quick navigation">
+    <div class="palette-box">
+      <input id="paletteInput" type="text" placeholder="Jump to… projects, resume, contact" autocomplete="off" aria-label="Search sections">
+      <div class="palette-list" id="paletteList" role="listbox"></div>
+      <div class="palette-foot">↑↓ navigate · Enter open · Esc close</div>
+    </div>
+  </div>
+
   <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
-
-
-
-  
 
 </body>
 </html>

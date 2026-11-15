@@ -1,163 +1,209 @@
-<section class="projects-section" id="projects">
-  <div class="projects-wrapper">
+{% from "components/_macros.html" import cover, smartpaper %}
+<section class="section" id="projects" data-label="Projects">
+  <div class="container">
 
-    <span class="section-label reveal">Work</span>
-    <h2 class="section-title reveal reveal-delay-1">Featured Projects</h2>
+    <span class="eyebrow reveal">Work</span>
+    <h2 class="section-title reveal" style="--d:.08s">AI <em>projects</em></h2>
+    <p class="section-sub reveal" style="--d:.12s">Multi-agent systems, RAG pipelines and ML models. Open any card for the full breakdown.</p>
 
-    <div class="projects-grid">
+    <div class="filters reveal" style="--d:.16s" role="group" aria-label="Filter projects">
+      <button class="filter-btn active" type="button" data-filter="all">All</button>
+      <button class="filter-btn" type="button" data-filter="agentic">Agentic AI</button>
+      <button class="filter-btn" type="button" data-filter="rag">RAG &amp; LLM</button>
+      <button class="filter-btn" type="button" data-filter="ml">ML &amp; Deep Learning</button>
+    </div>
 
-      <!-- Project 1 — award ribbon keeps it special without breaking layout -->
-      <div class="project-card reveal reveal-delay-1">
-        <div class="project-img-wrap">
-          <img src="/static/images/apnea_project.jpeg" class="project-image" alt="Sleep Apnea Project" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://drive.google.com/drive/folders/1q6aCcG38-Pu_Kst7kT0JsKw1V3vuf_Op" target="_blank" class="overlay-btn">View Drive →</a>
-          </div>
-          <div class="card-award-ribbon">🏆Best Real World Applicability Award</div>
+    <!-- Featured -->
+    <article class="proj proj-feature spot reveal" data-tags="agentic rag">
+      <div class="proj-media">
+        {{ smartpaper() }}
+        <span class="proj-cat">Agentic AI · RAG</span>
+        <span class="proj-badge">★ Featured</span>
+      </div>
+      <div class="proj-body">
+        <h3>Multi-Agent Multimodal Research Paper Assistant</h3>
+        <p class="proj-desc">Understands research papers across text, tables and images. A RAG pipeline with ChromaDB and LangGraph orchestrates Planner, Retriever, Reasoner and Critic agents, with a Phi-3 Mini model fine-tuned using QLoRA and deployed through Flask.</p>
+        <div class="chips"><span class="chip hot">LangGraph</span><span class="chip">ChromaDB</span><span class="chip">QLoRA</span><span class="chip">Hugging Face</span><span class="chip">Flask</span></div>
+        <div class="proj-actions">
+          <button class="proj-open" type="button">Details</button>
+          <a class="proj-link" href="https://github.com/Lingesh-7" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
-        <div class="project-content">
-          <span class="project-num">01</span>
-          <h3>AI-Enabled Sleep Apnea Detection & Monitoring System</h3>
-          <p>Real-time AI + IoT system detecting sleep apnea via breathing audio. Won 2nd at state hackathon & Best Real World Applicability at national ideathon.</p>
-          <div class="project-tech">
-            <span>Python</span><span>TensorFlow</span><span>Flask</span><span>ESP32</span><span>MFCC</span>
-          </div>
-          <div class="project-buttons">
-            <a href="https://drive.google.com/drive/folders/1q6aCcG38-Pu_Kst7kT0JsKw1V3vuf_Op" target="_blank" class="project-btn demo">Drive ↗</a>
-          </div>
+        <div class="proj-more" hidden>
+          <ul>
+            <li>Processes text, tables and images using semantic retrieval, vision-language models and NLP techniques.</li>
+            <li>RAG pipeline built with ChromaDB and LangGraph, orchestrating Planner, Retriever, Reasoner and Critic agents.</li>
+            <li>Fine-tuned the Phi-3 Mini model using QLoRA and deployed the application using Flask.</li>
+          </ul>
+          <div class="chips"><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">ChromaDB</span><span class="chip">Hugging Face</span><span class="chip">QLoRA</span></div>
         </div>
       </div>
+    </article>
 
-      <!-- Project 2 — NoteForge-AI -->
-      <div class="project-card reveal reveal-delay-2">
-        <div class="project-img-wrap">
-          <img src="/static/images/notes2.png" class="project-image" alt="NoteForge-AI" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://github.com/Lingesh-7/NoteForge-AI" target="_blank" class="overlay-btn outline">GitHub</a>
-            <a href="https://noteforge-ai-lingesh.streamlit.app/" target="_blank" class="overlay-btn">Live Demo →</a>
-          </div>
+    <div class="proj-grid">
+
+      <article class="proj spot reveal" data-tags="agentic rag">
+        <div class="proj-media">
+          {{ cover('NoteForge-AI pipeline from syllabus PDF to notes', ['PDF|prep', 'Semantic|search', 'Note|generation', 'Refine|loop'], 1, 'FAISS') }}
+          <span class="proj-cat">Agentic AI · RAG</span>
         </div>
-        <div class="project-content">
-          <span class="project-num">02</span>
+        <div class="proj-body">
           <h3>NoteForge-AI</h3>
-          <p>Multi-agent AI system that converts a syllabus into structured, exam-ready notes using retrieval, refinement loops, and automated question generation with PDF export.</p>
-          <div class="project-tech">
-            <span>Python</span><span>Streamlit</span><span>LangChain</span><span>LangGraph</span><span>LLMs</span>
+          <p class="proj-desc">Turns syllabus PDFs into structured, exam-focused notes with a LangGraph agent workflow and FAISS-backed retrieval, delivered as a Streamlit app.</p>
+          <div class="chips"><span class="chip hot">LangGraph</span><span class="chip">FAISS</span><span class="chip">RAG</span><span class="chip">Streamlit</span></div>
+          <div class="proj-actions">
+            <button class="proj-open" type="button">Details</button>
+            <a class="proj-link live" href="https://noteforge-ai-lingesh.streamlit.app/" target="_blank" rel="noopener">Live demo ↗</a>
+            <a class="proj-link" href="https://github.com/Lingesh-7/NoteForge-AI" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
-          <div class="project-buttons">
-            <a href="https://github.com/Lingesh-7/NoteForge-AI" target="_blank" class="project-btn github">GitHub ↗</a>
-            <a href="https://noteforge-ai-lingesh.streamlit.app/" target="_blank" class="project-btn demo">Live Demo ↗</a>
+          <div class="proj-more" hidden>
+            <ul>
+              <li>Converts syllabus documents into structured, exam-focused notes.</li>
+              <li>LangGraph-based multi-agent workflow with a RAG pipeline using FAISS, PDF preprocessing and semantic search.</li>
+              <li>Retrieval and refinement loops, plus automated question generation with PDF export, in an interactive Streamlit app.</li>
+            </ul>
+            <div class="chips"><span class="chip">Python</span><span class="chip">Streamlit</span><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">FAISS</span><span class="chip">RAG</span></div>
           </div>
         </div>
-      </div>
+      </article>
 
-      <!-- Project 3 -->
-      <div class="project-card reveal reveal-delay-3">
-        <div class="project-img-wrap">
-          <img src="/static/images/leaf.png" class="project-image" alt="Crop Disease" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://github.com/Lingesh-7/Crop-Disease-Classifier" target="_blank" class="overlay-btn">GitHub →</a>
+      <article class="proj spot reveal" style="--d:.06s" data-tags="rag">
+        <div class="proj-media">
+          {{ cover('News research tool pipeline from articles to answers', ['Load|articles', 'Embed|chunks', 'FAISS|search', 'LLM|answer'], 2, 'FAISS') }}
+          <span class="proj-cat">RAG · LLM</span>
+        </div>
+        <div class="proj-body">
+          <h3>AI-Powered News Research Tool</h3>
+          <p class="proj-desc">Ask questions about news articles and get answers grounded in the source text, using LLMs and FAISS vector search.</p>
+          <div class="chips"><span class="chip hot">LangChain</span><span class="chip">FAISS</span><span class="chip">LLMs</span><span class="chip">Streamlit</span></div>
+          <div class="proj-actions">
+            <button class="proj-open" type="button">Details</button>
+            <a class="proj-link" href="https://github.com/Lingesh-7/News-Research-Tool-using-Langchain" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+          <div class="proj-more" hidden>
+            <ul>
+              <li>Extracts insights from news articles and answers contextual questions about them.</li>
+              <li>Uses LLMs with FAISS vector search so answers come from the article text.</li>
+            </ul>
+            <div class="chips"><span class="chip">Python</span><span class="chip">LangChain</span><span class="chip">LLMs</span><span class="chip">FAISS</span><span class="chip">Streamlit</span></div>
           </div>
         </div>
-        <div class="project-content">
-          <span class="project-num">03</span>
+      </article>
+
+      <article class="proj spot reveal" style="--d:.12s" data-tags="ml">
+        <div class="proj-media">
+          {{ cover('Sleep apnea monitoring pipeline from sensors to guardian alert', ['ESP32|sensors', 'Flask|server', 'TensorFlow|model', 'Guardian|alert']) }}
+          <span class="proj-cat">Deep Learning · IoT</span>
+          <span class="proj-badge">🏆 Best Real World Applicability</span>
+        </div>
+        <div class="proj-body">
+          <h3>Real-Time Sleep Apnea Detection and Monitoring</h3>
+          <p class="proj-desc">Wearable system in active development that detects potential apnea events from breathing audio, heart rate and SpO₂ in real time.</p>
+          <div class="chips"><span class="chip hot">TensorFlow</span><span class="chip">Flask</span><span class="chip">ESP32</span><span class="chip">IoT</span></div>
+          <div class="proj-actions">
+            <button class="proj-open" type="button">Details</button>
+            <a class="proj-link" href="https://drive.google.com/drive/folders/1q6aCcG38-Pu_Kst7kT0JsKw1V3vuf_Op" target="_blank" rel="noopener">Project files ↗</a>
+          </div>
+          <div class="proj-more" hidden>
+            <ul>
+              <li>Detects potential apnea events using breathing audio, heart rate and SpO₂ signals in real time.</li>
+              <li>Inference runs on a Flask server instead of the ESP32, which has limited compute, for better accuracy and reliable alerts.</li>
+              <li>Sends real-time alerts to guardians when an apnea event is detected.</li>
+              <li>Won Best Real World Applicability at a national ideathon. Still under active development.</li>
+            </ul>
+            <div class="chips"><span class="chip">Python</span><span class="chip">TensorFlow</span><span class="chip">Flask</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">ESP32</span><span class="chip">IoT</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj spot reveal" style="--d:.18s" data-tags="ml">
+        <div class="proj-media">
+          {{ cover('Crop disease detection pipeline from leaf image to label', ['Image|processing', 'CNN|classifier', 'Disease|label']) }}
+          <span class="proj-cat">Deep Learning</span>
+        </div>
+        <div class="proj-body">
           <h3>Crop Disease Detection</h3>
-          <p>Classifies potato and tomato diseases with high accuracy using trained CNN models and image processing.</p>
-          <div class="project-tech">
-            <span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>CNN</span>
+          <p class="proj-desc">CNN classifier that identifies potato and tomato leaf diseases from a photo.</p>
+          <div class="chips"><span class="chip hot">TensorFlow</span><span class="chip">OpenCV</span><span class="chip">CNN</span></div>
+          <div class="proj-actions">
+            <button class="proj-open" type="button">Details</button>
+            <a class="proj-link" href="https://github.com/Lingesh-7/Crop-Disease-Classifier" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
-          <div class="project-buttons">
-            <a href="https://github.com/Lingesh-7/Crop-Disease-Classifier" target="_blank" class="project-btn github">GitHub ↗</a>
+          <div class="proj-more" hidden>
+            <ul>
+              <li>Classifies potato and tomato leaf diseases with high accuracy using trained CNN models.</li>
+              <li>Image processing prepares each leaf photo before it reaches the classifier.</li>
+            </ul>
+            <div class="chips"><span class="chip">Python</span><span class="chip">TensorFlow</span><span class="chip">OpenCV</span><span class="chip">CNN</span></div>
           </div>
         </div>
-      </div>
+      </article>
 
-      <!-- Project 4 -->
-      <div class="project-card reveal reveal-delay-1">
-        <div class="project-img-wrap">
-          <img src="/static/images/real.png" class="project-image" alt="Real Estate" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://github.com/Lingesh-7/Real-Estate-Prediction-ML" target="_blank" class="overlay-btn outline">GitHub</a>
-            <a href="https://real-estate-prediction-ml.onrender.com/" target="_blank" class="overlay-btn">Live Demo →</a>
+      <article class="proj spot reveal" style="--d:.24s" data-tags="ml">
+        <div class="proj-media">
+          {{ cover('Celebrity image classification pipeline from face to name', ['Face|detection', 'Feature|vectors', 'SVM|classifier', 'Predicted|name']) }}
+          <span class="proj-cat">Computer Vision</span>
+        </div>
+        <div class="proj-body">
+          <h3>Celebrity Image Classification</h3>
+          <p class="proj-desc">Face detection with OpenCV and an SVM classifier that names the celebrity in an image.</p>
+          <div class="chips"><span class="chip hot">OpenCV</span><span class="chip">Scikit-learn</span><span class="chip">SVM</span></div>
+          <div class="proj-actions">
+            <button class="proj-open" type="button">Details</button>
+            <a class="proj-link" href="https://github.com/Lingesh-7/Image-Classification-Using-ML" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+          <div class="proj-more" hidden>
+            <ul>
+              <li>Face detection and classification using a trained SVM model.</li>
+              <li>Real-time predictions using OpenCV.</li>
+            </ul>
+            <div class="chips"><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">Scikit-learn</span><span class="chip">SVM</span></div>
           </div>
         </div>
-        <div class="project-content">
-          <span class="project-num">04</span>
-          <h3>Real Estate ML Prediction System</h3>
-          <p>ML model predicting Bengaluru housing prices with data preprocessing, feature engineering, and regression.</p>
-          <div class="project-tech">
-            <span>Python</span><span>Scikit-Learn</span><span>Flask</span><span>Pandas</span>
-          </div>
-          <div class="project-buttons">
-            <a href="https://github.com/Lingesh-7/Real-Estate-Prediction-ML" target="_blank" class="project-btn github">GitHub ↗</a>
-            <a href="https://real-estate-prediction-ml.onrender.com/" target="_blank" class="project-btn demo">Demo ↗</a>
-          </div>
-        </div>
-      </div>
+      </article>
 
-      <!-- Project 5 -->
-      <div class="project-card reveal reveal-delay-2">
-        <div class="project-img-wrap">
-          <img src="/static/images/res.png" class="project-image" alt="News Research Tool" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://github.com/Lingesh-7/News-Research-Tool-using-Langchain" target="_blank" class="overlay-btn">GitHub →</a>
+      <article class="proj spot reveal" style="--d:.3s" data-tags="ml">
+        <div class="proj-media">
+          {{ cover('House price prediction pipeline from listing to price', ['Clean|data', 'Feature|prep', 'Regression|model', 'Price|estimate']) }}
+          <span class="proj-cat">Machine Learning</span>
+        </div>
+        <div class="proj-body">
+          <h3>Real Estate Price Prediction</h3>
+          <p class="proj-desc">Regression model that predicts Bengaluru house prices, served through a Flask web app with a live demo.</p>
+          <div class="chips"><span class="chip hot">Scikit-learn</span><span class="chip">Pandas</span><span class="chip">Flask</span></div>
+          <div class="proj-actions">
+            <button class="proj-open" type="button">Details</button>
+            <a class="proj-link live" href="https://real-estate-prediction-ml.onrender.com/" target="_blank" rel="noopener">Live demo ↗</a>
+            <a class="proj-link" href="https://github.com/Lingesh-7/Real-Estate-Prediction-ML" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+          <div class="proj-more" hidden>
+            <ul>
+              <li>Predicts Bengaluru housing prices with data preprocessing, feature engineering and regression.</li>
+              <li>Served as a Flask web app, deployed with a live demo.</li>
+            </ul>
+            <div class="chips"><span class="chip">Python</span><span class="chip">Scikit-learn</span><span class="chip">Pandas</span><span class="chip">Flask</span></div>
           </div>
         </div>
-        <div class="project-content">
-          <span class="project-num">05</span>
-          <h3>AI Powered News Research Tool</h3>
-          <p>Extracts insights from articles and enables users to ask contextual questions using LLMs and FAISS vector search.</p>
-          <div class="project-tech">
-            <span>LangChain</span><span>LLMs</span><span>FAISS</span><span>Streamlit</span>
-          </div>
-          <div class="project-buttons">
-            <a href="https://github.com/Lingesh-7/News-Research-Tool-using-Langchain" target="_blank" class="project-btn github">GitHub ↗</a>
-          </div>
-        </div>
-      </div>
+      </article>
 
-      <!-- Project 6 -->
-      <div class="project-card reveal reveal-delay-3">
-        <div class="project-img-wrap">
-          <img src="/static/images/bot.png" class="project-image" alt="Twitter Bot" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://github.com/Lingesh-7/Twitter-News-Bot-for-Puducherry" target="_blank" class="overlay-btn">GitHub →</a>
-          </div>
-        </div>
-        <div class="project-content">
-          <span class="project-num">06</span>
-          <h3>Twitter News Bot for Puducherry</h3>
-          <p>Automated news aggregation bot that collects regional news, processes content, and posts updates automatically.</p>
-          <div class="project-tech">
-            <span>Python</span><span>Selenium</span><span>BeautifulSoup</span><span>Automation</span>
-          </div>
-          <div class="project-buttons">
-            <a href="https://github.com/Lingesh-7/Twitter-News-Bot-for-Puducherry" target="_blank" class="project-btn github">GitHub ↗</a>
-          </div>
-        </div>
-      </div>
+    </div>
 
-      <!-- Project 7 -->
-      <div class="project-card reveal reveal-delay-1">
-        <div class="project-img-wrap">
-          <img src="/static/images/v1.png" class="project-image" alt="Celebrity Classification" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://github.com/Lingesh-7/Image-Classification-Using-ML" target="_blank" class="overlay-btn">GitHub →</a>
-          </div>
-        </div>
-        <div class="project-content">
-          <span class="project-num">07</span>
-          <h3>Celebrity Image Classification System</h3>
-          <p>Face detection and classification with a trained SVM model for real-time predictions using OpenCV.</p>
-          <div class="project-tech">
-            <span>Python</span><span>OpenCV</span><span>Scikit-Learn</span><span>SVM</span>
-          </div>
-          <div class="project-buttons">
-            <a href="https://github.com/Lingesh-7/Image-Classification-Using-ML" target="_blank" class="project-btn github">GitHub ↗</a>
-          </div>
-        </div>
-      </div>
+    <p class="no-results" id="noResults">No projects in this category yet.</p>
 
+  </div>
+
+  <!-- Project detail modal -->
+  <div class="modal" id="projModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle" hidden>
+    <div class="modal-box">
+      <button class="modal-close" type="button" aria-label="Close details">✕</button>
+      <div class="modal-cover" id="pmCover"></div>
+      <div class="modal-body">
+        <span class="proj-cat static" id="pmCat"></span>
+        <h3 id="pmTitle"></h3>
+        <p id="pmLead"></p>
+        <ul class="proj-points" id="pmPoints"></ul>
+        <div class="chips" id="pmChips"></div>
+        <div class="proj-actions" id="pmLinks"></div>
+      </div>
     </div>
   </div>
 </section>

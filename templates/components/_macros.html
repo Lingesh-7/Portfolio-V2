@@ -1,0 +1,66 @@
+{# Inline SVG macros. They use CSS variables, so they follow the active colour theme. #}
+
+{% macro cover(label, nodes, store_index=-1, store_label='') -%}
+{%- set n = nodes|length -%}
+{%- set gap = 30 -%}
+{%- set w = ((760 - gap * (n - 1)) / n)|round(1) -%}
+{%- set has_store = store_index >= 0 -%}
+{%- set y = 112 if has_store else 168 -%}
+{%- set h = 116 -%}
+<svg class="cover" viewBox="0 0 800 450" role="img" aria-label="{{ label }}" preserveAspectRatio="xMidYMid meet">
+  <rect class="cv-bg" width="800" height="450"/>
+  <path class="cv-grid" d="M0 90H800M0 180H800M0 270H800M0 360H800M160 0V450M320 0V450M480 0V450M640 0V450"/>
+  {%- for node in nodes %}
+  {%- set x = 20 + loop.index0 * (w + gap) %}
+  {%- set lines = node.split('|') %}
+  <rect class="cv-node" x="{{ x }}" y="{{ y }}" width="{{ w }}" height="{{ h }}" rx="16"/>
+  {%- for ln in lines %}
+  <text class="cv-text" x="{{ x + w / 2 }}" y="{{ y + h / 2 + 9 - (lines|length - 1) * 16 + loop.index0 * 32 }}">{{ ln }}</text>
+  {%- endfor %}
+  {%- if not loop.last %}
+  <path class="cv-arrow" d="M{{ x + w + 4 }} {{ y + h / 2 }}H{{ x + w + gap - 6 }}"/>
+  {%- endif %}
+  {%- endfor %}
+  {%- if has_store %}
+  {%- set sx = 20 + store_index * (w + gap) + w / 2 %}
+  <path class="cv-dash" d="M{{ sx }} {{ y + h }}V318"/>
+  <ellipse class="cv-store" cx="{{ sx }}" cy="338" rx="70" ry="19"/>
+  <path class="cv-store" d="M{{ sx - 70 }} 338v36c0 10 31 19 70 19s70-9 70-19v-36"/>
+  <text class="cv-store-label" x="{{ sx }}" y="383">{{ store_label }}</text>
+  {%- endif %}
+</svg>
+{%- endmacro %}
+
+{% macro smartpaper() -%}
+<svg class="cover" viewBox="0 0 800 450" role="img" aria-label="Multi-agent research paper assistant: Planner, Retriever, Reasoner and Critic agents with a ChromaDB store" preserveAspectRatio="xMidYMid meet">
+  <rect class="cv-bg" width="800" height="450"/>
+  <path class="cv-grid" d="M0 90H800M0 180H800M0 270H800M0 360H800M160 0V450M320 0V450M480 0V450M640 0V450"/>
+  {%- for item in [('Planner', 30), ('Retriever', 215), ('Reasoner', 425), ('Critic', 610)] %}
+  <rect class="cv-node" x="{{ item[1] }}" y="116" width="160" height="104" rx="16"/>
+  <text class="cv-text" x="{{ item[1] + 80 }}" y="178">{{ item[0] }}</text>
+  {%- endfor %}
+  <path class="cv-arrow" d="M190 168H211"/>
+  <path class="cv-arrow" d="M375 168H421"/>
+  <path class="cv-arrow" d="M585 168H606"/>
+  <path class="cv-loop" d="M690 220V288H505V224"/>
+  <text class="cv-sub" x="598" y="318">feedback loop</text>
+  <path class="cv-dash" d="M295 220V284"/>
+  <ellipse class="cv-store" cx="295" cy="304" rx="70" ry="19"/>
+  <path class="cv-store" d="M225 304v36c0 10 31 19 70 19s70-9 70-19v-36"/>
+  <text class="cv-store-label" x="295" y="348">ChromaDB</text>
+  <text class="cv-sub" x="400" y="396">LangGraph · Phi-3 Mini · QLoRA</text>
+</svg>
+{%- endmacro %}
+
+{# The Lingesh R mark: an AI chip with an LR monogram #}
+{% macro logo(size=36) -%}
+<svg class="logo-svg" width="{{ size }}" height="{{ size }}" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <path d="M24 6v7M32 6v7M40 6v7M24 51v7M32 51v7M40 51v7M6 24h7M6 32h7M6 40h7M51 24h7M51 32h7M51 40h7" fill="none" stroke="url(#g-diag)" stroke-width="3" stroke-linecap="round"/>
+  <rect x="12" y="12" width="40" height="40" rx="10" style="fill: var(--bg)" stroke="url(#g-diag)" stroke-width="3"/>
+  <g transform="translate(-1.5 0)" fill="none" stroke="url(#g-diag)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22.5 22V41.5H30.5"/>
+    <path d="M35 41.5V22H39.5a5 5 0 0 1 0 10H35M39.5 32L44.5 41.5"/>
+  </g>
+  <circle cx="17.5" cy="17.5" r="2" style="fill: var(--accent-2)"/>
+</svg>
+{%- endmacro %}

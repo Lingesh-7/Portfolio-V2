@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Lingesh R logo">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff6b35"/><stop offset="1" stop-color="#ffaa44"/></linearGradient></defs>
+  <path d="M24 6v7M32 6v7M40 6v7M24 51v7M32 51v7M40 51v7M6 24h7M6 32h7M6 40h7M51 24h7M51 32h7M51 40h7" fill="none" stroke="url(#g)" stroke-width="3" stroke-linecap="round"/>
+  <rect x="12" y="12" width="40" height="40" rx="10" fill="#0a0a0f" stroke="url(#g)" stroke-width="3"/>
+  <g transform="translate(-1.5 0)" fill="none" stroke="url(#g)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22.5 22V41.5H30.5"/>
+    <path d="M35 41.5V22H39.5a5 5 0 0 1 0 10H35M39.5 32L44.5 41.5"/>
+  </g>
+  <circle cx="17.5" cy="17.5" r="2" fill="#ffaa44"/>
+</svg>
