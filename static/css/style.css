@@ -357,7 +357,8 @@ section { position: relative; }
 .timeline-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
 .timeline-role { font-family: var(--f-head); font-size: 23px; color: var(--strong); }
 .timeline-company { font-family: var(--f-mono); font-size: 13px; color: var(--accent-2); }
-a.timeline-company:hover { text-decoration: underline; }
+a.timeline-company:hover, .timeline-cert:hover { text-decoration: underline; }
+.timeline-cert { color: var(--accent-2); }
 .timeline-date { font-family: var(--f-mono); font-size: 11.5px; padding: 6px 13px; border-radius: 999px; border: 1px solid rgba(var(--a1),0.45); color: var(--soft-1); white-space: nowrap; }
 .timeline-list { display: grid; gap: 16px; margin-bottom: 22px; }
 .timeline-list li { position: relative; padding-left: 22px; color: var(--text-2); font-size: 15px; line-height: 1.7; }

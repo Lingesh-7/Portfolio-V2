@@ -74,7 +74,7 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 (function initTyped() {
   const el = $('#typed-role');
   if (!el || prefersReducedMotion) return;
-  const roles = ['Agentic AI Engineer', 'LLM Application Developer', 'RAG Systems Builder', 'AI Automation Engineer', 'Generative AI Developer'];
+  const roles = ['Agentic AI Engineer', 'LLM Application Developer', 'RAG Systems Builder', 'Generative AI Developer'];
   let r = 0, i = roles[0].length, deleting = true;
   function tick() {
     const word = roles[r];
@@ -260,13 +260,14 @@ function showToast(message, isError = false) {
   const EMAIL = 'lingesh.r.official@gmail.com';
   const themeItems = (window.PORTFOLIO_THEMES || []).map(t => ({ label: 'Theme: ' + t.name, hint: 'theme', action: () => window.setTheme(t.id, true) }));
   const items = [
+    { label: 'Focus',           hint: 'section',  href: '/#capabilities' },
     { label: 'Experience',      hint: 'section',  href: '/#experience' },
     { label: 'Projects',        hint: 'section',  href: '/#projects' },
     { label: 'AI Stack',        hint: 'section',  href: '/#skills' },
     { label: 'Awards',          hint: 'section',  href: '/#achievements' },
     { label: 'Certifications',  hint: 'section',  href: '/#certifications' },
     { label: 'Contact me',      hint: 'page',     href: '/contact' },
-    { label: 'Open resume',     hint: 'pdf',      href: '/resume', external: true },
+    { label: 'Download resume', hint: 'pdf',      href: '/resume' },
     { label: 'GitHub',          hint: 'link',     href: 'https://github.com/Lingesh-7', external: true },
     { label: 'LinkedIn',        hint: 'link',     href: 'https://www.linkedin.com/in/rajalingesh', external: true },
     { label: 'Send an email',   hint: 'mailto',   href: 'mailto:' + EMAIL },

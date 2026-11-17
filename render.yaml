@@ -11,7 +11,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: SITE_URL
-        value: https://lingesh-r-portfolio-o39l.onrender.com
+        value: https://lingesh-r-portfolio-2fcu.onrender.com
       - key: FLASK_KEY
         generateValue: true
       - key: account_sid

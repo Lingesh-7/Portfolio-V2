@@ -35,7 +35,7 @@ def home():
 
 @app.route("/resume")
 def resume():
-    return send_from_directory("static/resume", "lingesh_resume.pdf", as_attachment=False)
+    return send_from_directory("static/resume", "lingesh_resume.pdf", as_attachment=True, download_name="Lingesh_R_Resume.pdf")
 
 
 @app.route("/contact")
@@ -58,11 +58,11 @@ def send_message():
     sms_body = f"New Portfolio Message\nName: {name}\nEmail: {email}\nSubject: {subject or '-'}\nMessage: {message}"
 
     try:
-        if client and num and tonum:
-            client.messages.create(body=sms_body, from_=num, to=tonum)
-        else:
-            # No Twilio configured — log instead of failing silently.
-            app.logger.info("Contact form submission (Twilio not configured): %s", sms_body)
+        if not (client and num and tonum):
+            # Never show "sent" for a message that went nowhere.
+            app.logger.error("Contact form submission dropped, Twilio not configured: %s", sms_body)
+            return redirect("/contact?error=true")
+        client.messages.create(body=sms_body, from_=num, to=tonum)
         return redirect("/contact?sent=true")
     except TwilioRestException as e:
         app.logger.error("Twilio error sending contact message: %s", e)

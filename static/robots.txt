@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lingesh-r-portfolio-o39l.onrender.com/sitemap.xml
+Sitemap: https://lingesh-r-portfolio-2fcu.onrender.com/sitemap.xml

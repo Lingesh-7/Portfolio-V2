@@ -22,20 +22,21 @@
       </div>
       <div class="proj-body">
         <h3>Multi-Agent Multimodal Research Paper Assistant</h3>
-        <p class="proj-desc">Understands research papers across text, tables and images. A RAG pipeline with ChromaDB and LangGraph orchestrates Planner, Retriever, Reasoner and Critic agents, with a Phi-3 Mini model fine-tuned using QLoRA and deployed through Flask.</p>
-        <div class="chips"><span class="chip hot">LangGraph</span><span class="chip">ChromaDB</span><span class="chip">QLoRA</span><span class="chip">Hugging Face</span><span class="chip">Flask</span></div>
+        <p class="proj-desc">Understands research papers across text, tables and images. A RAG pipeline with ChromaDB and LangGraph orchestrates Planner, Retriever, Reasoner and Critic agents, with a Phi-3 Mini model fine-tuned using QLoRA to answer research-based questions, built and deployed as a Streamlit app.</p>
+        <div class="chips"><span class="chip hot">LangGraph</span><span class="chip">ChromaDB</span><span class="chip">QLoRA</span><span class="chip">Hugging Face</span><span class="chip">Streamlit</span></div>
         <div class="proj-actions">
           <button class="proj-open" type="button">Details</button>
           <a class="proj-link live" href="https://smart-paper-ai-lingesh.streamlit.app/" target="_blank" rel="noopener">Live demo ↗</a>
-          <a class="proj-link" href="https://github.com/Lingesh-7" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="proj-link" href="https://github.com/Lingesh-7/SmartPaper-Ai" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
         <div class="proj-more" hidden>
           <ul>
             <li>Processes text, tables and images using semantic retrieval, vision-language models and NLP techniques.</li>
             <li>RAG pipeline built with ChromaDB and LangGraph, orchestrating Planner, Retriever, Reasoner and Critic agents.</li>
-            <li>Fine-tuned the Phi-3 Mini model using QLoRA and deployed the application using Flask.</li>
+            <li>Fine-tuned Phi-3 Mini with QLoRA on the QASPER dataset to answer research-based questions, improving question-answering accuracy by 4.8%.</li>
+            <li>Converted the application into a Streamlit app, deployed live on Streamlit Community Cloud.</li>
           </ul>
-          <div class="chips"><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">ChromaDB</span><span class="chip">Hugging Face</span><span class="chip">QLoRA</span></div>
+          <div class="chips"><span class="chip">Python</span><span class="chip">Streamlit</span><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">ChromaDB</span><span class="chip">Hugging Face</span><span class="chip">QLoRA</span></div>
         </div>
       </div>
     </article>
@@ -59,7 +60,8 @@
           <div class="proj-more" hidden>
             <ul>
               <li>Converts syllabus documents into structured, exam-focused notes.</li>
-              <li>LangGraph-based multi-agent workflow with a RAG pipeline using FAISS, PDF preprocessing and semantic search.</li>
+              <li>LangGraph workflow of planner, researcher, writer, critic and formatter agents for iterative note generation.</li>
+              <li>RAG pipeline combining PDF ingestion and semantic search with FAISS and live web retrieval for grounded content.</li>
               <li>Retrieval and refinement loops, plus automated question generation with PDF export, in an interactive Streamlit app.</li>
             </ul>
             <div class="chips"><span class="chip">Python</span><span class="chip">Streamlit</span><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">FAISS</span><span class="chip">RAG</span></div>
@@ -83,7 +85,8 @@
           <div class="proj-more" hidden>
             <ul>
               <li>Extracts insights from news articles and answers contextual questions about them.</li>
-              <li>Uses LLMs with FAISS vector search so answers come from the article text.</li>
+              <li>Loads article URLs, splits text with RecursiveCharacterTextSplitter and embeds chunks with Hugging Face embeddings into a FAISS vector store.</li>
+              <li>A RetrievalQA chain with LLaMA 3 8B via ChatGroq answers questions with sources, cutting manual research time.</li>
             </ul>
             <div class="chips"><span class="chip">Python</span><span class="chip">LangChain</span><span class="chip">LLMs</span><span class="chip">FAISS</span><span class="chip">Streamlit</span></div>
           </div>
@@ -107,11 +110,14 @@
           <div class="proj-more" hidden>
             <ul>
               <li>Detects potential apnea events using breathing audio, heart rate and SpO₂ signals in real time.</li>
+              <li>Built the dataset from raw polysomnography breathing recordings, segmented into 10-second audio frames and labelled across 103,210 samples.</li>
+              <li>Extracted MFCC features and trained a TensorFlow MLP classifier that reaches 81% accuracy on apnea event detection.</li>
+              <li>Sensors are an INMP441 microphone and a MAX30102 for heart rate and SpO₂, streaming to an ESP32.</li>
               <li>Inference runs on a Flask server instead of the ESP32, which has limited compute, for better accuracy and reliable alerts.</li>
               <li>Sends real-time alerts to guardians when an apnea event is detected.</li>
-              <li>Won Best Real World Applicability at a national ideathon. Still under active development.</li>
+              <li>Won Best Real World Applicability at a national ideathon. Documented in a 2025 research report, with a paper in preparation. Still under active development.</li>
             </ul>
-            <div class="chips"><span class="chip">Python</span><span class="chip">TensorFlow</span><span class="chip">Flask</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">ESP32</span><span class="chip">IoT</span></div>
+            <div class="chips"><span class="chip">Python</span><span class="chip">TensorFlow</span><span class="chip">Flask</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">ESP32</span><span class="chip">IoT</span><span class="chip">MFCC</span></div>
           </div>
         </div>
       </article>
@@ -131,8 +137,8 @@
           </div>
           <div class="proj-more" hidden>
             <ul>
-              <li>Classifies potato and tomato leaf diseases with high accuracy using trained CNN models.</li>
-              <li>Image processing prepares each leaf photo before it reaches the classifier.</li>
+              <li>Separate CNN models trained on 7,324 leaf images: 2,152 potato images at 96.09% accuracy and 5,172 tomato images at 99.81%.</li>
+              <li>Preprocessing and augmentation improve robustness, and a Flask web app predicts from an uploaded photo or a live camera.</li>
             </ul>
             <div class="chips"><span class="chip">Python</span><span class="chip">TensorFlow</span><span class="chip">OpenCV</span><span class="chip">CNN</span></div>
           </div>
@@ -178,7 +184,8 @@
           </div>
           <div class="proj-more" hidden>
             <ul>
-              <li>Predicts Bengaluru housing prices with data preprocessing, feature engineering and regression.</li>
+              <li>Predicts Bengaluru housing prices from location, square footage, BHK and bathrooms, with feature engineering, outlier removal and categorical encoding.</li>
+              <li>Regression models reach 85.9% prediction accuracy.</li>
               <li>Served as a Flask web app, deployed with a live demo.</li>
             </ul>
             <div class="chips"><span class="chip">Python</span><span class="chip">Scikit-learn</span><span class="chip">Pandas</span><span class="chip">Flask</span></div>
